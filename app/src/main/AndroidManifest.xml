@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material.Light.DarkActionBar">
         <activity android:name="com.raywenderlich.android.droidwiki.ui.splashscreen.Splashscreen"
-            android:theme="@style/Splashscreen">
+            android:theme="@style/Splashscreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
