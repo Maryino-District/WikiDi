@@ -2,7 +2,14 @@ plugins {
   id 'com.android.application'
   id 'org.jetbrains.kotlin.android'
   id 'kotlin-android-extensions'
+  id 'kotlin-kapt'
+  id 'kotlin-android'
+
 }
+kapt {
+  generateStubs = true
+}
+
 android {
   compileSdkVersion 33
   defaultConfig {
@@ -22,14 +29,22 @@ android {
 }
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.70"
+  implementation 'androidx.appcompat:appcompat:1.6.1'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.70"
 
   implementation fileTree(dir: 'libs', include: ['*.jar'])
 
   implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
+  //noinspection GradleCompatible
   implementation 'com.android.support:recyclerview-v7:26.1.0'
+  //noinspection GradleCompatible
   implementation 'com.android.support:cardview-v7:26.1.0'
+  implementation 'com.google.dagger:dagger-android:2.44.1'
+  implementation 'androidx.appcompat:appcompat:1.6.1'
+
+  kapt 'com.google.dagger:dagger-android-processor:2.44.1'
+  kapt 'com.google.dagger:dagger-compiler:2.44.1'
 
   implementation 'com.squareup.okhttp3:okhttp:3.8.1'
 

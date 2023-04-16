@@ -32,7 +32,7 @@ package com.raywenderlich.android.droidwiki.ui.search
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.*
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -41,6 +41,7 @@ import com.raywenderlich.android.droidwiki.R
 import com.raywenderlich.android.droidwiki.model.Entry
 import kotlinx.android.synthetic.main.activity_search.*
 import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.raywenderlich.android.droidwiki.utils.errorDialog
 
 class SearchActivity : Activity(), EntryView {
@@ -54,7 +55,6 @@ class SearchActivity : Activity(), EntryView {
     actionBar?.setHomeAsUpIndicator(R.drawable.ic_home)
     actionBar?.setDisplayHomeAsUpEnabled(true)
 
-    results_rv.layoutManager = LinearLayoutManager(this)
 
     presenter.setView(this)
 
@@ -112,9 +112,7 @@ class SearchActivity : Activity(), EntryView {
   }
 
   override fun displayEntries(results: List<Entry>) {
-    results_rv.post {
-      results_rv.adapter = EntryAdapter(this, results)
-    }
+
   }
 
   override fun displayError(error: String?) {

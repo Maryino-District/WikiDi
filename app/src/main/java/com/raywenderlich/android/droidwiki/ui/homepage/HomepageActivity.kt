@@ -37,23 +37,30 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.raywenderlich.android.droidwiki.R
+import com.raywenderlich.android.droidwiki.dagger.AppComponent
+import com.raywenderlich.android.droidwiki.dagger.DaggerAppComponent
+import com.raywenderlich.android.droidwiki.dagger.PresenterModule
 import com.raywenderlich.android.droidwiki.model.WikiHomepage
 import com.raywenderlich.android.droidwiki.utils.start
 import com.raywenderlich.android.droidwiki.utils.parseHtml
 import kotlinx.android.synthetic.main.activity_homepage.*
 import com.raywenderlich.android.droidwiki.ui.search.SearchActivity
 import com.raywenderlich.android.droidwiki.utils.errorDialog
+import javax.inject.Inject
 
 class HomepageActivity : Activity(), HomepageView {
 
-  private val presenter: HomepagePresenter = HomepagePresenterImpl()
-
+  var presenter: HomepagePresenter? = null
+    @Inject set
+  var component: AppComponent? = null
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_homepage)
+    component = DaggerAppComponent.builder().presenterModule(PresenterModule()).build()
+    component?.inject(this)
 
-    presenter.setView(this)
-    presenter.loadHomepage()
+    presenter?.setView(this)
+    presenter?.loadHomepage()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
